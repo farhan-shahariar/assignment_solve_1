@@ -1,257 +1,120 @@
 import 'package:flutter/material.dart';
-import 'package:assignment_solve_1/mood.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Screen Decoration',
-      home: Gallery(),
+      title: 'Shopping Cart',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          color: Colors.green,
-          toolbarHeight: 98,
-
-        )
+        primarySwatch: Colors.blue,
       ),
+      home: ShoppingCartScreen(),
     );
   }
 }
 
-class Gallery extends StatelessWidget{
+class ShoppingCartScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Photo Gallery', style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 20,
-          color: Colors.white,
+  _ShoppingCartScreenState createState() => _ShoppingCartScreenState();
+}
 
-        ),),
-        leading: IconButton(onPressed: () {Navigator.pop(context);},
-            icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,)),
+class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+  int _itemCount = 0;
+  final double _unitPrice = 10.0;
+  String _itemName = "Item";
+
+  void _incrementItemCount() {
+    setState(() {
+      _itemCount++;
+      if (_itemCount == 5) {
+        _showDialog();
+      }
+    });
+  }
+
+  void _decrementItemCount() {
+    if (_itemCount > 0) {
+      setState(() {
+        _itemCount--;
+      });
+    }
+  }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Alert'),
+        content: Text('You have added 5 $_itemName on your bag!'),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.more_vert, color: Colors.white,))
-        ],
-      ),
-
-      body: GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-
-        ),
-        children: [
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Mood', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Mood 1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
           ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Asthetic', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Asthetic1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Animals', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Animal 1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('City', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/City1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Travel', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Travel 1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Sky', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Sky 1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Road', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Road 1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
-          GestureDetector(
-            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Mood()));},
-            child: Padding( padding: EdgeInsets.all(10),
-              child:
-              Container(
-                alignment: Alignment.bottomLeft,
-                padding: EdgeInsets.all(20) ,
-                child: Text('Flowers', style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),),
-                height: 180,
-                width: 180,
-                decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage('image/Flower 1.jpg'),
-                      fit: BoxFit.cover,
-                    )
-                ),
-              ),),
-          ),
-
         ],
       ),
     );
   }
 
+  void _showSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Congratulations! You have checked out successfully.'),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double totalAmount = _itemCount * _unitPrice;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Shopping Cart'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '$_itemName Count: $_itemCount',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: _decrementItemCount,
+                  icon: Icon(Icons.remove),
+                ),
+                IconButton(
+                  onPressed: _incrementItemCount,
+                  icon: Icon(Icons.add),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Total Amount: \$${totalAmount.toStringAsFixed(2)}',
+              style: TextStyle(fontSize: 20),
+            ),
+            Spacer(),
+            Center(
+              child: ElevatedButton(
+                onPressed: _showSnackBar,
+                child: Text('CHECK OUT'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
